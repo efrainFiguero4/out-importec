@@ -8,8 +8,8 @@ spring:
     name: outimportec-service
 
   datasource:
-    url: jdbc:postgresql://localhost:/dcn6pjibd8kj7e
-    username: admin
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
     password: admin
     driver-class-name: org.postgresql.Driver
     hikari:
