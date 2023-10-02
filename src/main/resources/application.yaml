@@ -1,0 +1,37 @@
+server:
+  port: 8090
+  servlet:
+    application-display-name: outimportec-service
+
+spring:
+  application:
+    name: outimportec-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:/dcn6pjibd8kj7e
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-test-query: SELECT 1
+      minimum-idle: 1
+      maximum-pool-size: 3
+      schema: outimportec
+    initialization-mode: always
+    data: classpath:data/categoria.sql,classpath:data/rol.sql,classpath:data/producto.sql
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+    hibernate:
+      ddl-auto: update
+      hibernate:
+        naming:
+          implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  thymeleaf:
+    suffix: .html
+    cache: false
