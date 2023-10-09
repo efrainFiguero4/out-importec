@@ -8,16 +8,16 @@ import java.util.List;
 
 public interface ClienteService {
 
-    public List<Usuario> listarTodos();
+    List<Usuario> listarTodos();
 
-    public void guardar(Usuario usuario);
+    void guardar(Usuario usuario);
 
-    public Usuario buscarPorId(Long id);
+    Usuario buscarPorId(Long id);
 
-    public void eliminar(Long id);
+    void eliminar(Long id);
 
-    public List<Role> listarRoles();
+    List<Role> listarRoles();
 
-    public Usuario findByUsername(String username);
+    Usuario findByUsername(String username);
 
 }

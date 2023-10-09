@@ -7,5 +7,5 @@ import pe.edu.utp.outimportec.model.Role;
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
 
-    public Role findByCodigo(String codigo);
+    Role findByCodigo(String codigo);
 }

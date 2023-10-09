@@ -9,8 +9,8 @@ import java.util.List;
 
 @Repository
 public interface CarritoRepository extends JpaRepository<Carrito, Long> {
-    public List<Carrito> findByIdUsuarioAndStatus(Long idUsuario, String status);
+    List<Carrito> findByIdUsuarioAndStatus(Long idUsuario, String status);
 
     @Query(value = "SELECT COUNT(1) FROM Carrito o WHERE o.idUsuario=?1 AND o.status='PENDIENTE'")
-    public Integer obtenerCantidadCarritoXUsuarioId(Long idUsuario);
+    Integer obtenerCantidadCarritoXUsuarioId(Long idUsuario);
 }

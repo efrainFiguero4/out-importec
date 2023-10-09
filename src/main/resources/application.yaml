@@ -3,6 +3,10 @@ server:
   servlet:
     application-display-name: outimportec-service
 
+application:
+  title: Out Importec
+  version: 1.0
+
 spring:
   application:
     name: outimportec-service

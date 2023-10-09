@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface PagoRepository extends JpaRepository<Pago, Long> {
-    public List<Pago> findByUsuarioId(Long idUsuario);
+    List<Pago> findByUsuarioId(Long idUsuario);
 
     @Query(value = "SELECT p FROM Pago p WHERE p.usuario.id=?1 And p.fechaPago>=?2 and p.fechaPago<=?3")
 //    @Query(nativeQuery = true, value = "select * from t_pago where usuario_id = ?1 and fecha_pago >=?2 and  fecha_pago <=?3")
