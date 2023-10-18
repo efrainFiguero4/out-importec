@@ -14,7 +14,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
-    password:
+    password: admin
     driver-class-name: org.postgresql.Driver
     hikari:
       connection-test-query: SELECT 1
