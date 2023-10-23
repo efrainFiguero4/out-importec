@@ -20,7 +20,6 @@ import static pe.edu.utp.outimportec.utils.Constants.*;
 
 @Controller
 public class ProductoController {
-
     private final ProductoRepository productoRepository;
     private final CategoriaRepository categoriaRepository;
 
@@ -36,13 +35,13 @@ public class ProductoController {
     }
 
     @GetMapping("/productos")
-    public String navigateActualizar(Model model) {
+    public String listarProductos(Model model) {
         model.addAttribute("productos", listarProductos());
         return "catalogo/listar";
     }
 
     @GetMapping("/producto")
-    public String navigate(Model model) {
+    public String visualizarFormularioProducto(Model model) {
         Producto producto = new Producto();
         producto.setImagen("image/image.svg");
         model.addAttribute(PRODUCTO, producto);
@@ -52,7 +51,7 @@ public class ProductoController {
     }
 
     @GetMapping("/producto/{id}")
-    public String navigateActualizar(Model model, @PathVariable Long id) {
+    public String obtenerProductoId(Model model, @PathVariable Long id) {
         Producto producto = productoRepository.getOne(id);
         model.addAttribute(PRODUCTO, producto);
         model.addAttribute(TITULO, "ACTUALIZAR PRODUCTO");
@@ -61,7 +60,7 @@ public class ProductoController {
     }
 
     @PostMapping("/producto/registrar")
-    public String registrarProducto(@Valid Producto producto, BindingResult result, RedirectAttributes redirect) {
+    public String registrarActualizarProducto(@Valid Producto producto, BindingResult result, RedirectAttributes redirect) {
         Long productoId = producto.getId();
         if (result.hasFieldErrors()) {
             redirect.addFlashAttribute(PRODUCTO, producto);

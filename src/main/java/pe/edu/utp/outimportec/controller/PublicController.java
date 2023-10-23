@@ -35,7 +35,7 @@ public class PublicController {
     private static final String MODEL_CONTACTO = "contacto";
 
     @GetMapping("/cliente")
-    public String formularioCreate(Model model) {
+    public String obtenerFormularioRegistroCliente(Model model) {
         List<Role> listadoRoles = clienteService.listarRoles();
         if (loginService.isAuthenticated()) {
             return "redirect:/";
@@ -48,7 +48,7 @@ public class PublicController {
     }
 
     @PostMapping("/cliente")
-    public String guardar(@ModelAttribute Usuario usuario, BindingResult bindingResult, RedirectAttributes redirect) {
+    public String registrarCliente(@ModelAttribute Usuario usuario, BindingResult bindingResult, RedirectAttributes redirect) {
         if (bindingResult.hasErrors()) {
             redirect.addAttribute(MENSAJE, "Ocurrió un error al registrarse.");
             return "public/registrarme";
@@ -66,7 +66,7 @@ public class PublicController {
     }
 
     @PostMapping("/contacto")
-    public String createSubmitForm(RedirectAttributes redirect, @Valid Contacto contacto, BindingResult result) {
+    public String registrarConsultaContacto(RedirectAttributes redirect, @Valid Contacto contacto, BindingResult result) {
         if (result.hasFieldErrors()) {
             redirect.addAttribute(MENSAJE, "No se ha podido registrar la consulta.");
         } else {

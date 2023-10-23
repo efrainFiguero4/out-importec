@@ -36,7 +36,7 @@ public class UsuarioController {
      * @Comentario: Mantenimiento de Mi Cuenta
      */
     @GetMapping("/micuenta")
-    public String micuenta(Model model, Principal principal) {
+    public String obtenerMiCuenta(Model model, Principal principal) {
         Usuario usuario = clienteService.findByUsername(principal.getName());
         usuario.setIsUpdate(true);
         model.addAttribute("usuario", usuario);
@@ -44,7 +44,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/micuenta")
-    public String modificarcuenta(@ModelAttribute Usuario usuario, RedirectAttributes redirect, BindingResult bindingResult) {
+    public String modificarCuenta(@ModelAttribute Usuario usuario, RedirectAttributes redirect, BindingResult bindingResult) {
         usuarioValidator.validate(usuario, bindingResult);
         if (bindingResult.hasErrors()) {
             redirect.addFlashAttribute(ERROR, bindingResult.getAllErrors().get(0).getCode());
@@ -68,7 +68,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/clientes/create")
-    public String crear(Model model) {
+    public String obtenerFomularioCliente(Model model) {
         Usuario usuario = new Usuario(false);
         List<Role> listadoRoles = clienteService.listarRoles();
 
@@ -79,7 +79,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/clientes/save")
-    public String guardar(@ModelAttribute Usuario cliente, BindingResult bindingResult, RedirectAttributes redirect) {
+    public String registrarActualizarCliente(@ModelAttribute Usuario cliente, BindingResult bindingResult, RedirectAttributes redirect) {
         if (Objects.nonNull(cliente.getId())) {
             cliente.setIsUpdate(true);
             cliente.setCodigoRole(cliente.getRole().getCodigo());
@@ -104,7 +104,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/clientes/edit/{id}")
-    public String editar(@PathVariable("id") Long idCliente, Model model) {
+    public String obtenerClientePorId(@PathVariable("id") Long idCliente, Model model) {
         Usuario usuario = clienteService.buscarPorId(idCliente);
         List<Role> listadoRoles = clienteService.listarRoles();
         usuario.setCodigoRole(usuario.getRole().getCodigo());
@@ -116,7 +116,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/clientes/delete/{id}")
-    public String eliminar(@PathVariable("id") Long idCliente) {
+    public String eliminarClientePorId(@PathVariable("id") Long idCliente) {
         clienteService.eliminar(idCliente);
         System.out.println("Registro Eliminado:");
         return "redirect:/clientes/lista";
