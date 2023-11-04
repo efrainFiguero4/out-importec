@@ -33,6 +33,8 @@ public class Carrito {
     private Integer cantidad;
 
     private BigDecimal precio;
+    private BigDecimal subtotal;
+    private BigDecimal igv;
 
     @Builder.Default
     private String status = ESTADO.PENDIENTE.name();

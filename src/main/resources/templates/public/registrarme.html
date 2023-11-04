@@ -23,15 +23,15 @@
                 <div class="col-12 col-sm-6">
                     <div class="form-group">
                         <input type="hidden" th:field="*{id}">
-                        <label for="username" class="form-label">Email</label>
+                        <label for="username" class="form-label">Nombre de Usuario</label>
                         <input type="text" th:field="*{username}" class="form-control" id="username"
-                               placeholder="Email del usuario" required>
+                               placeholder="Nombre de Usuario" required>
                         <div class="invalid-feedback mt-0">Este campo es obligatorio</div>
                     </div>
                 </div>
                 <div class="col-12 col-sm-6">
                     <div class="form-group">
-                        <label for="nombre" class="form-label">Nombre</label>
+                        <label for="nombre" class="form-label">Nombres</label>
                         <input type="text" th:field="*{nombre}" class="form-control" id="nombre"
                                placeholder="Nombre del usuario" required>
                         <div class="invalid-feedback mt-0">Este campo es obligatorio</div>
@@ -42,6 +42,30 @@
                         <label for="apellidos" class="form-label">Apellidos</label>
                         <input type="text" th:field="*{apellidos}" class="form-control" id="apellidos"
                                placeholder="Apellidos del usuario" required>
+                        <div class="invalid-feedback mt-0">Este campo es obligatorio</div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                        <label for="correo" class="form-label">Correo Electrónico</label>
+                        <input type="email" th:field="*{correo}" class="form-control" id="correo"
+                               placeholder="Correo Electrónico" required>
+                        <div class="invalid-feedback mt-0">Este campo es obligatorio</div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="text" th:field="*{telefono}" data-inputmask="'mask': '999999999'"
+                               class="form-control" id="telefono" placeholder="Teléfono" required>
+                        <div class="invalid-feedback mt-0">Este campo es obligatorio</div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <input type="text" th:field="*{direccion}" class="form-control" id="direccion"
+                               placeholder="Dirección" required>
                         <div class="invalid-feedback mt-0">Este campo es obligatorio</div>
                     </div>
                 </div>

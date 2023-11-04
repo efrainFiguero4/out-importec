@@ -25,8 +25,8 @@
                         <input type="hidden" th:field="*{role}">
                         <input type="hidden" th:field="*{isUpdate}">
                         <input type="hidden" th:field="*{codigoRole}">
-                        <label for="correo" class="form-label">Correo Electrónico</label>
-                        <input type="text" th:field="*{username}" class="form-control" id="correo" readonly>
+                        <label for="username" class="form-label">Nombre de usuario</label>
+                        <input type="text" th:field="*{username}" class="form-control" id="username" readonly>
                     </div>
                 </div>
                 <div class="col-12 col-sm-6">
@@ -43,7 +43,30 @@
                         <div class="invalid-feedback mt-0">Este campo es obligatorio</div>
                     </div>
                 </div>
-
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                        <label for="correo" class="form-label">Correo Electrónico</label>
+                        <input type="email" th:field="*{correo}" class="form-control" id="correo"
+                               placeholder="Correo Electrónico" required>
+                        <div class="invalid-feedback mt-0">Este campo es obligatorio</div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="text" th:field="*{telefono}" data-inputmask="'mask': '999999999'"
+                               class="form-control" id="telefono" placeholder="Teléfono" required>
+                        <div class="invalid-feedback mt-0">Este campo es obligatorio</div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <input type="text" th:field="*{direccion}" class="form-control" id="direccion"
+                               placeholder="Dirección" required>
+                        <div class="invalid-feedback mt-0">Este campo es obligatorio</div>
+                    </div>
+                </div>
                 <div class="col-12 col-sm-6">
                     <div class="form-group">
                         <label for="password" class="form-label">Contraseña</label>

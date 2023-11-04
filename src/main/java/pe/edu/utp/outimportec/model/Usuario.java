@@ -27,6 +27,12 @@ public class Usuario {
 
     @NotBlank
     private String apellidos;
+    @NotBlank
+    private String correo;
+    @NotBlank
+    private String telefono;
+    @NotBlank
+    private String direccion;
 
     @Column(unique = true)
     private String username;

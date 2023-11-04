@@ -78,7 +78,7 @@
                                         <div class="title">Total</div>
                                         <div class="item">SUBTOTAL:<span th:text="'S/. '+${pago.montoTotal}"></span>
                                         </div>
-                                        <div class="item">IMPUESTOS:<span>S/. 0</span></div>
+                                        <div class="item">IMPUESTOS:<span th:text="'S/. '+${pago.pedido.igv}"></span></div>
                                         <div class="item">ENVÍO:<span th:text="'S/. 0.00'"></span></div>
                                         <div class="item">DESCUENTO:<span th:text="'S/. 0.00'"></span></div>
                                         <div class="item strong">TOTAL:<span th:text="'S/. '+${pago.montoTotal}"></span>

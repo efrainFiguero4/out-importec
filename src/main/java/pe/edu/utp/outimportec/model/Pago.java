@@ -27,6 +27,8 @@ public class Pago {
     private Date fechaPago;
 
     private String direccion;
+    private String correo;
+    private String telefono;
 
     private String nombreTarjeta;
 

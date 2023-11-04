@@ -73,7 +73,7 @@ public class UsuarioController {
         List<Role> listadoRoles = clienteService.listarRoles();
 
         model.addAttribute("titulo", "REGISTRAR USUARIO");
-        model.addAttribute("cliente", usuario);
+        model.addAttribute("usuario", usuario);
         model.addAttribute("roles", listadoRoles);
         return "clientes/formulario";
     }
@@ -110,7 +110,7 @@ public class UsuarioController {
         usuario.setCodigoRole(usuario.getRole().getCodigo());
 
         model.addAttribute("titulo", "ACTUALIZAR USUARIO");
-        model.addAttribute("cliente", usuario);
+        model.addAttribute("usuario", usuario);
         model.addAttribute("roles", listadoRoles);
         return "clientes/formulario";
     }

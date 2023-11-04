@@ -16,6 +16,7 @@ import pe.edu.utp.outimportec.repository.ProductoRepository;
 import pe.edu.utp.outimportec.service.ClienteService;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.security.Principal;
 import java.util.List;
 
@@ -44,9 +45,12 @@ public class CarritoController {
     public String obtenerCarrito(@PathVariable Long idProducto, Principal principal, RedirectAttributes redirect) {
         Usuario user = clienteService.findByUsername(principal.getName());
         Producto producto = productoRepository.getOne(idProducto);
+        BigDecimal subtotal = producto.getPrecio().divide(new BigDecimal("1.18"), RoundingMode.HALF_UP);
         carritoRepository.saveAndFlush(Carrito.builder()
                 .cantidad(1)
-                .precio(producto.getPrecio().multiply(new BigDecimal(1)))
+                .precio(producto.getPrecio())
+                .subtotal(subtotal)
+                .igv(producto.getPrecio().subtract(subtotal))
                 .producto(producto)
                 .idUsuario(user.getId())
                 .build());
@@ -66,10 +70,14 @@ public class CarritoController {
     public ResponseEntity<String> actualizarCantidadProducto(@PathVariable Long idcarrito, @PathVariable Integer cantidad) {
         log.info("carrito: {} ,cantidad: {} ", idcarrito, cantidad);
         if (cantidad > 0) {
-            Carrito car = carritoRepository.getOne(idcarrito);
-            car.setCantidad(cantidad);
-            car.setPrecio(car.getProducto().getPrecio().multiply(new BigDecimal(cantidad)));
-            carritoRepository.save(car);
+            Carrito carrito = carritoRepository.getOne(idcarrito);
+            carrito.setCantidad(cantidad);
+            carrito.setPrecio(carrito.getProducto().getPrecio().multiply(new BigDecimal(cantidad)));
+            BigDecimal subtotal = carrito.getPrecio().divide(new BigDecimal("1.18"), RoundingMode.HALF_UP);
+
+            carrito.setSubtotal(subtotal);
+            carrito.setIgv(carrito.getPrecio().subtract(subtotal));
+            carritoRepository.save(carrito);
         }
         return ResponseEntity.ok("OK");
     }

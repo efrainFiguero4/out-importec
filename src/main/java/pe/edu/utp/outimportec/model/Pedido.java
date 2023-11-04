@@ -30,6 +30,12 @@ public class Pedido {
     private List<Carrito> productos;
 
     private BigDecimal montoTotal;
+    private BigDecimal subTotal;
+    private BigDecimal igv;
+    private String metodoPago;
+    private String direccion;
+    private String telefono;
+    private String correo;
 
     @JsonFormat(shape = STRING, pattern = "dd/MM/yyyy")
     private Date fechaPedido;

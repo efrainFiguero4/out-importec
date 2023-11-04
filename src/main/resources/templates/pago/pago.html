@@ -18,6 +18,21 @@
                         <div class="invalid-feedback mt-0">Este campo es obligatorio</div>
                     </div>
                 </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                        <label for="correo" class="form-label">Correo electrónico</label>
+                        <input type="email" th:field="*{correo}" class="form-control" id="correo" required>
+                        <div class="invalid-feedback mt-0">Este campo es obligatorio</div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                        <label for="telefono" class="form-label">Número celular</label>
+                        <input type="text" th:field="*{telefono}" data-inputmask="'mask': '999999999'"
+                               class="form-control" id="telefono" required>
+                        <div class="invalid-feedback mt-0">Este campo es obligatorio</div>
+                    </div>
+                </div>
 
                 <div class="col-12 col-sm-6">
                     <div class="form-group">
@@ -93,9 +108,5 @@
         </form>
     </div>
 </div>
-
-<script>
-    $(":input").inputmask();
-</script>
 </body>
 </html>

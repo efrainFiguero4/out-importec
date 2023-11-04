@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pe.edu.utp.outimportec.model.*;
 import pe.edu.utp.outimportec.repository.*;
+import pe.edu.utp.outimportec.service.EmailService;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
@@ -40,6 +41,7 @@ public class PagoController {
     private final ClienteRepository clienteRepository;
     private final PagoRepository pagoRepository;
     private final PedidoRepository pedidoRepository;
+    private final EmailService emailService;
 
     @GetMapping("/pago")
     public String index(Model model, Principal principal, RedirectAttributes redirect) {
@@ -54,6 +56,9 @@ public class PagoController {
         pago.setFechaPago(new Date());
         pago.setMontoTotal(montoTotal);
         pago.setUsuario(usuario);
+        pago.setCorreo(usuario.getCorreo());
+        pago.setDireccion(usuario.getDireccion());
+        pago.setTelefono(usuario.getTelefono());
         pago.setNombreTarjeta(usuario.getNombre().concat(" ").concat(usuario.getApellidos()));
         model.addAttribute(MODEL_VIEW, pago);
         return "pago/pago";
@@ -61,7 +66,7 @@ public class PagoController {
 
     @PostMapping("/pago/create")
     public String registrarPago(Model model, @Valid Pago pago, Principal principal,
-                                   BindingResult result, RedirectAttributes redirect) {
+                                BindingResult result, RedirectAttributes redirect) {
         Usuario usuario = clienteRepository.findByUsername(principal.getName());
         if (result.hasFieldErrors()) {
             redirect.addFlashAttribute(ERROR, "Debe completar los campos requeridos");
@@ -69,11 +74,20 @@ public class PagoController {
             List<Carrito> listaCarrito = carritoRepository.findByIdUsuarioAndStatus(usuario.getId(), PENDIENTE.name());
             listaCarrito.forEach(o -> o.setStatus(PAGADO.name()));
 
+            BigDecimal subTotal = listaCarrito.stream().map(Carrito::getSubtotal).reduce(BigDecimal.ZERO, BigDecimal::add);
+            BigDecimal igv = listaCarrito.stream().map(Carrito::getIgv).reduce(BigDecimal.ZERO, BigDecimal::add);
+
             Pedido pedido = pedidoRepository.saveAndFlush(Pedido.builder()
                     .idUsuario(usuario.getId())
                     .fechaPedido(new Date())
                     .productos(listaCarrito)
                     .montoTotal(pago.getMontoTotal())
+                    .direccion(pago.getDireccion())
+                    .correo(pago.getCorreo())
+                    .telefono(pago.getTelefono())
+                    .metodoPago("PAGO CON TARJETA")
+                    .igv(igv)
+                    .subTotal(subTotal)
                     .build());
 
             pago.setFechaPago(new Date());
@@ -82,9 +96,10 @@ public class PagoController {
             pagoRepository.save(pago);
 
             model.addAttribute(MODEL_VIEW, pago);
+            emailService.enviarEmailTexto(pago);
             redirect.addFlashAttribute(MENSAJE, "Se registro su pago y se genero su pedido nro " + pedido.getId());
         }
-        return "redirect:/carrito";
+        return "redirect:/pedidos";
     }
 
     @GetMapping("/pedidos")

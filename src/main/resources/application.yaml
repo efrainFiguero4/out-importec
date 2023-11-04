@@ -8,6 +8,8 @@ application:
   version: 1.0
 
 spring:
+  main:
+    allow-bean-definition-overriding: true
   application:
     name: outimportec-service
 
@@ -52,6 +54,3 @@ spring:
           auth: true
           starttls:
             enable: true
-
-  main:
-    allow-bean-definition-overriding: true

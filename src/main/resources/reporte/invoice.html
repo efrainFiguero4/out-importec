@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Boleta Electrónica</title>
+    <style>
+        body {
+            font-family: "Roboto", sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #E5E7ED;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 0px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #333C6D;
+            border-radius: 1%;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        .text-one {
+            color: #333C6D;
+        }
+
+        .electroplus__cabecera_title {
+            font-weight: 900;
+            background-color: #333C6D;
+            color: #ffffff;
+        }
+
+        .t-center {
+            text-align: center !important;
+        }
+
+        .t-right {
+            text-align: right !important;
+        }
+
+        .header {
+            display: inline-flex;
+            justify-content: start;
+            width: 100%;
+            align-content: start;
+        }
+
+        .t-total {
+            min-width: 115px;
+        }
+        .t-none{
+            background-color: #ffffff; border: none !important;
+        }
+        .b-none{
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="electroplus__cabecera_title">BOLETA ELECTRÓNICA</h1>
+        <p>
+        <div class="header"><b class="text-one t-total">Nº de Boleta </b><b class="text-one">:</b> B001 - 00${id}</div>
+        <div class="header"><b class="text-one t-total">Fecha </b><b class="text-one">:</b> ${fechaPago}</div>
+        <div class="header"><b class="text-one t-total">Cliente </b><b class="text-one">:</b> ${nombre} ${apellidos}</div>
+        <div class="header"><b class="text-one t-total">Dirección </b><b class="text-one">:</b> ${direccion}</div>
+        <div class="header"><b class="text-one t-total">Teléfono </b><b class="text-one">:</b> ${telefono}</div>
+        <div class="header"><b class="text-one t-total">Email </b><b class="text-one">:</b> ${correo}</div>
+        </p>
+
+        <table>
+            <tr>
+                <th class="t-center text-one">Descripción</th>
+                <th class="t-center text-one">Cantidad</th>
+                <th class="t-center text-one">Precio <br> Unitario</th>
+                <th class="t-center text-one">Total</th>
+            </tr>
+            ${items}
+            <tr>
+                <th class="t-none"></th>
+                <th class="t-none"></th>
+                <th class="b-none t-right">Subtotal:</th>
+                <th class="b-none">s/. ${subTotal}</th>
+            </tr>
+            <tr>
+                <th class="t-none"></th>
+                <th class="t-none"></th>
+                <th class="b-none t-right">IGV 18%:</th>
+                <th class="b-none">s/. ${igv}</th>
+            </tr>
+            <tr>
+                <th class="t-none"></th>
+                <th class="t-none"></th>
+                <th class="b-none t-right">Total:</th>
+                <th class="b-none">s/. ${montoTotal}</th>
+            </tr>
+        </table>
+
+        <br>
+
+        <p>
+            <strong class="text-one">Método de pago:&#160;&#160;</strong> ${metodoPago}<br>
+        </p>
+
+        <h2 class="text-one"> <u>Detalles del emisor:</u></h2>
+        <p>
+            <div class="header"><b class="text-one t-total">Razón social </b><b class="text-one">:</b> OUT IMPORTEC</div>
+            <div class="header"><b class="text-one t-total">Dirección </b><b class="text-one">:</b> CC MAXIPLAZA, Av. Garcilaso de la Vega 1236, Lima 00051</div>
+            <div class="header"><b class="text-one t-total">Teléfono </b><b class="text-one">:</b> 941 221 894</div>
+        </p>
+    </div>
+</body>
+
+</html>

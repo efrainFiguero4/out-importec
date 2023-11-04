@@ -34,7 +34,6 @@ public class DashboardController {
     @GetMapping(value = "/pedidostotales", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Map<String, Object>>> productos() {
         List<Pedido> pedidos = pedidoRepository.findAll();
-        this.emailService.enviarEmailTexto("");
 
         List<Carrito> carritos = new ArrayList<>();
         pedidos.forEach(p -> carritos.addAll(p.getProductos()));
