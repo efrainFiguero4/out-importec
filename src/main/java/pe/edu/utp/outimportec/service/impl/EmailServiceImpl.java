@@ -44,38 +44,15 @@ public class EmailServiceImpl implements EmailService {
         try {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            InternetAddress remitente = new InternetAddress("notificaciones@outimportec.com", "Notificaciones Out Importec");
+//            InternetAddress remitente = new InternetAddress("notificaciones@outimportec.com", "Notificaciones Out Importec");
 
-            String[] emails = {"andreson561@hotmail.com", "cristhian_hebert@hotmail.com", "efrain.figue.95@gmail.com"};
-            helper.setTo(emails);
-            helper.setFrom(remitente.getAddress());
+            helper.setTo(pago.getCorreo());
+//            helper.setFrom(remitente.getAddress());
             helper.setSubject("Comprobante de Pago");
             helper.setText(getBody(pago), true);
 
             mailSender.send(message);
-        } catch (MessagingException | UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void enviarEmailTextoAdjunto(String to, String subject, String body, String attachmentPath) {
-        try {
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, true);
-
-            helper.setTo(to);
-            helper.setSubject(subject);
-            helper.setText(body, true); // Habilita el contenido HTML
-
-            // Adjuntar el archivo
-            Path path = Paths.get(attachmentPath);
-            byte[] attachmentBytes = Files.readAllBytes(path);
-            Resource attachment = new ByteArrayResource(attachmentBytes);
-            helper.addAttachment("archivo_adjunto.pdf", attachment);
-
-            mailSender.send(message);
-        } catch (MessagingException | IOException e) {
+        } catch (MessagingException e) {
             e.printStackTrace();
         }
     }
