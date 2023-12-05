@@ -79,4 +79,10 @@ public class ProductoController {
         return productoRepository.findAll().stream()
                 .peek(p -> p.setPrecioDescuento(p.getDescuento().add(p.getPrecio()))).collect(Collectors.toList());
     }
+
+    @GetMapping("/producto/delete/{id}")
+    public String eliminarClientePorId(@PathVariable("id") Long idProducto) {
+        productoRepository.deleteById(idProducto);
+        return "redirect:/productos";
+    }
 }

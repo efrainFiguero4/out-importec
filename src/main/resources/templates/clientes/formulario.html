@@ -18,7 +18,7 @@
         </div>
     </div>
     <div class="py-4">
-        <form th:action="@{/clientes/save}" th:object="${usuario}" method="POST" class="needs-validation" novalidate>
+        <form autocomplete="off" th:action="@{/clientes/save}" th:object="${usuario}" method="POST" class="needs-validation" novalidate>
             <div class="row">
                 <div class="col-12 col-sm-6">
                     <div class="form-group">
@@ -94,7 +94,7 @@
                 <div class="col-12 col-sm-6">
                     <div class="form-group">
                         <label for="confirmarpassword" class="form-label">Confirmar Contraseña</label>
-                        <input type="text" th:field="*{confirmarpassword}" class="form-control" id="confirmarpassword"
+                        <input type="password" th:field="*{confirmarpassword}" class="form-control" id="confirmarpassword"
                                required>
                         <div class="invalid-feedback mt-0">Este campo es obligatorio</div>
                     </div>

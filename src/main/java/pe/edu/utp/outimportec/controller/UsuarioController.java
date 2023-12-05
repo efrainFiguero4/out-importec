@@ -116,9 +116,9 @@ public class UsuarioController {
     }
 
     @GetMapping("/clientes/delete/{id}")
-    public String eliminarClientePorId(@PathVariable("id") Long idCliente) {
+    public String eliminarClientePorId(@PathVariable("id") Long idCliente, RedirectAttributes redirect) {
         clienteService.eliminar(idCliente);
-        System.out.println("Registro Eliminado:");
+        redirect.addFlashAttribute(MENSAJE, "Usuario eliminado correctamente.");
         return "redirect:/clientes/lista";
     }
 }

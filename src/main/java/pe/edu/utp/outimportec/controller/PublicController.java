@@ -35,7 +35,7 @@ public class PublicController {
     private static final String MODEL_CONTACTO = "contacto";
 
     @GetMapping("/cliente")
-    public String obtenerFormularioRegistroCliente(Model model) {
+    public String obtenerFormularioRegistroCliente(Model model,RedirectAttributes redirect) {
         List<Role> listadoRoles = clienteService.listarRoles();
         if (loginService.isAuthenticated()) {
             return "redirect:/";
@@ -50,12 +50,12 @@ public class PublicController {
     @PostMapping("/cliente")
     public String registrarCliente(@ModelAttribute Usuario usuario, BindingResult bindingResult, RedirectAttributes redirect) {
         if (bindingResult.hasErrors()) {
-            redirect.addAttribute(MENSAJE, "Ocurrió un error al registrarse.");
+            redirect.addFlashAttribute(MENSAJE, "Ocurrió un error al registrarse.");
             return "public/registrarme";
         }
         clienteService.guardar(usuario);
         loginService.iniciarSesion(usuario.getUsername(), usuario.getPassword());
-        redirect.addAttribute(MENSAJE, "Cliente Agregado con éxito");
+        redirect.addFlashAttribute(MENSAJE, "Cliente Agregado con éxito");
         return "redirect:/login";
     }
 
@@ -68,11 +68,11 @@ public class PublicController {
     @PostMapping("/contacto")
     public String registrarConsultaContacto(RedirectAttributes redirect, @Valid Contacto contacto, BindingResult result) {
         if (result.hasFieldErrors()) {
-            redirect.addAttribute(MENSAJE, "No se ha podido registrar la consulta.");
+            redirect.addFlashAttribute(MENSAJE, "No se ha podido registrar la consulta.");
         } else {
             this.contactsData.save(contacto);
-            redirect.addAttribute(MENSAJE, "Se registro la consulta.");
+            redirect.addFlashAttribute(MENSAJE, "Se ha registrado la consulta.");
         }
-        return INDEX;
+        return "redirect:/inicio";
     }
 }

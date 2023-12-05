@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="py-4">
-        <form th:object="${producto}" th:action="@{/producto/registrar}" method="POST" class="needs-validation"
+        <form autocomplete="off" th:object="${producto}" th:action="@{/producto/registrar}" method="POST" class="needs-validation"
               novalidate>
             <input type="hidden" th:field="${producto.id}"/>
             <input type="hidden" th:field="${producto.nombreimagen}" id="nombreimagen"/>
